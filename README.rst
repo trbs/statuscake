@@ -4,9 +4,6 @@ StatusCake
 .. image:: https://travis-ci.org/trbs/statuscake.svg?branch=master
     :target: https://travis-ci.org/trbs/statuscake
 
-.. image:: https://coveralls.io/repos/trbs/statuscake/badge.png
-    :target: https://coveralls.io/r/trbs/statuscake
-
 .. image:: https://pypip.in/v/statuscake/badge.png
     :target: https://pypi.python.org/pypi/statuscake/
     :alt: Latest PyPI version

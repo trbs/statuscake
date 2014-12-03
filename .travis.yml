@@ -12,12 +12,9 @@ before_install:
   - sudo chmod 0777 /var/run
 
 install:
-  - pip install "coverage>=3.6" "nose>=1.3.0" "flake8>=2.1" "coveralls>=0.3"
+  - pip install "nose>=1.3.0" "flake8>=2.1"
   - pip install -e .
 
 script:
   - flake8 --show-source --ignore=E501,W391 .
-  - nosetests -v --with-coverage --cover-package=statuscake
-
-after_success:
-  - coveralls
+  - nosetests -v
