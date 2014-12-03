@@ -3,7 +3,7 @@ import time
 import urllib
 import requests
 from requests.adapters import HTTPAdapter
-from .exceptions import StatusCakeAuthError, StatusCakeNotLinkedError, StatusCakeFieldMissingError, StatusCakeFieldError, StatusCakeResponseError
+from .exceptions import StatusCakeError, StatusCakeAuthError, StatusCakeNotLinkedError, StatusCakeFieldMissingError, StatusCakeFieldError, StatusCakeResponseError
 
 
 def to_comma_list(value):
@@ -88,9 +88,9 @@ class StatusCake(object):
         print_raw = kwargs.pop('print_raw', False)
         response = getattr(self.session, method)(url, headers=headers, data=data, **kwargs)
         if print_raw:
-            print response.text
+            print(response.text)
         if print_json:
-            print response.json()
+            print(response.json())
         if check_errors:
             json_resp = response.json()
             if isinstance(json_resp, dict) and (json_resp.get('Success', True) is False or json_resp.get('Error', None) is not None):
