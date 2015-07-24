@@ -175,6 +175,9 @@ class StatusCake(object):
             raise StatusCakeFieldMissingError("WebsiteURL missing")
         if 'TestType' not in data:
             raise StatusCakeFieldMissingError("TestType missing")
+        if 'CheckRate' not in data:
+            # Use default
+            data['CheckRate'] = 300
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
