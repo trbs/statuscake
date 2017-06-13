@@ -13,14 +13,14 @@ def to_comma_list(value):
 
 
 class StatusCake(object):
-    URL_LOCATIONS = "https://www.statuscake.com/API/Locations/json"
-    URL_ALERT = "https://www.statuscake.com/API/Alerts/?TestID=%s"
-    URL_ALL_GROUPS = "https://www.statuscake.com/API/ContactGroups/"
-    URL_UPDATE_GROUP = "https://www.statuscake.com/API/ContactGroups/Update/"
-    URL_ALL_TESTS = "https://www.statuscake.com/API/Tests/"
-    URL_DETAILS_TEST = "https://www.statuscake.com/API/Tests/Details/?TestID=%s"
-    URL_UPDATE_TEST = "https://www.statuscake.com/API/Tests/Update"
-    URL_AUTH_CHECK = "https://www.statuscake.com/API/Auth/"
+    URL_LOCATIONS = "https://app.statuscake.com/API/Locations/json"
+    URL_ALERT = "https://app.statuscake.com/API/Alerts/?TestID=%s"
+    URL_ALL_GROUPS = "https://app.statuscake.com/API/ContactGroups/"
+    URL_UPDATE_GROUP = "https://app.statuscake.com/API/ContactGroups/Update/"
+    URL_ALL_TESTS = "https://app.statuscake.com/API/Tests/"
+    URL_DETAILS_TEST = "https://app.statuscake.com/API/Tests/Details/?TestID=%s"
+    URL_UPDATE_TEST = "https://app.statuscake.com/API/Tests/Update"
+    URL_AUTH_CHECK = "https://app.statuscake.com/API/Auth/"
 
     CONTACT_GROUP_FIELDS = {
         'GroupName': (six.string_types, None, None),
