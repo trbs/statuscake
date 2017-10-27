@@ -58,7 +58,8 @@ class StatusCake(object):
         'RealBrowser': (int, (0, 1), None),
         'TriggerRate': (int, range(0, 61), None),
         'TestTags': (six.string_types, None, to_comma_list),
-        'FinalEndpoint': (six.string_types, None, None)
+        'FinalEndpoint': (six.string_types, None, None),
+        'PostRaw': (six.string_types, None, None)
     }
 
     def __init__(self, api_key, api_user, timeout=10, auth_check=False):
