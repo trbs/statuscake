@@ -21,6 +21,8 @@ class StatusCake(object):
     URL_DETAILS_TEST = "https://app.statuscake.com/API/Tests/Details/?TestID=%s"
     URL_UPDATE_TEST = "https://app.statuscake.com/API/Tests/Update"
     URL_AUTH_CHECK = "https://app.statuscake.com/API/Auth/"
+    URL_PERIODS = "https://app.statuscake.com/API/Tests/Periods/?TestID=%s"
+    URL_CHECKS = "https://app.statuscake.com/API/Tests/Checks/?TestID=%s"
 
     CONTACT_GROUP_FIELDS = {
         'GroupName': (six.string_types, None, None),
@@ -122,6 +124,7 @@ class StatusCake(object):
                 raise StatusCakeFieldError("Field %s value %s does not match one of: %s" % (field_name, field_type, field_values))
 
     def do_auth_check(self, **kwargs):
+        # pass optional parameters like params = {'Fields': 'location,performance'}
         self._request('get', self.URL_AUTH_CHECK, **kwargs).json()
         return True
 
@@ -164,6 +167,12 @@ class StatusCake(object):
 
     def get_details_test(self, test_id, **kwargs):
         return self._request('get', self.URL_DETAILS_TEST % test_id, **kwargs).json()
+
+    def get_periods(self, test_id, **kwargs):
+        return self._request('get', self.URL_PERIODS % test_id, **kwargs).json()
+
+    def get_checks(self, test_id, **kwargs):
+        return self._request('get', self.URL_CHECKS % test_id, **kwargs).json()
 
     def delete_test(self, test_id, **kwargs):
         return self._request('delete', self.URL_DETAILS_TEST % test_id, **kwargs).json()
