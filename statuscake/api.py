@@ -124,7 +124,6 @@ class StatusCake(object):
                 raise StatusCakeFieldError("Field %s value %s does not match one of: %s" % (field_name, field_type, field_values))
 
     def do_auth_check(self, **kwargs):
-        # pass optional parameters like params = {'Fields': 'location,performance'}
         self._request('get', self.URL_AUTH_CHECK, **kwargs).json()
         return True
 
@@ -172,6 +171,7 @@ class StatusCake(object):
         return self._request('get', self.URL_PERIODS % test_id, **kwargs).json()
 
     def get_checks(self, test_id, **kwargs):
+        # pass optional parameters like params = {'Fields': 'location,performance'}
         return self._request('get', self.URL_CHECKS % test_id, **kwargs).json()
 
     def delete_test(self, test_id, **kwargs):
