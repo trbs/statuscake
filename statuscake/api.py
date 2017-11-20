@@ -41,12 +41,12 @@ class StatusCake(object):
 
     SSL_FIELDS = {
         'domain': (six.string_types, None, None),
-        'checkrate': (int, (300,600,2800,3600,86400,2073600), None),
-        'contact_groups': (six.string_types,None,to_comma_list),
-        'alert_at' : (six.string_types,None, None),
-        'alert_expiray' : (bool, None, None),
+        'checkrate': (int, (300, 600, 2800, 3600, 86400, 2073600), None),
+        'contact_groups': (six.string_types,None, to_comma_list),
+        'alert_at': (six.string_types,None, None),
+        'alert_expiray': (bool, None, None),
         'alert_reminder': (bool, None, None),
-        'alert_broken'  : (bool, None,None)
+        'alert_broken': (bool, None, None)
     }
 
     TESTS_FIELDS = {
@@ -177,7 +177,7 @@ class StatusCake(object):
 
     def get_all_tests(self, **kwargs):
         return self._request('get', self.URL_ALL_TESTS, **kwargs).json()
-  
+
     def get_all_ssl(self, **kwargs):
         return self._request('get', self.URL_SSL, **kwargs).json()
 
@@ -195,24 +195,24 @@ class StatusCake(object):
         return self._request('delete', self.URL_DETAILS_TEST % test_id, **kwargs).json()
 
     def insert_ssl(self, data, **kwargs):
-       if not isinstance(data, dict):
+        if not isinstance(data, dict):
            raise StatusCakeError("data argument must be a dict")
-       if 'domain' not in data:
+        if 'domain' not in data:
            raise StatusCakeFieldMissingError("domain missing")
-       if 'checkrate' not in data:
+        if 'checkrate' not in data:
            data['checkrate'] = 3600
-       if 'contact_groups' not in data:
+        if 'contact_groups' not in data:
            raise StatusCakeFieldMissingError("contact_groups missing")
-       if 'alert_at' not in data:
+        if 'alert_at' not in data:
            data['alert_at'] = '1,7,30'
-       if 'alert_expiry' not in data:
+        if 'alert_expiry' not in data:
            data['alert_expiry'] = True
-       if 'alert_reminder' not in data:
+        if 'alert_reminder' not in data:
            data['alert_reminder'] = True
-       if 'alert_broken' not in data:
+        if 'alert_broken' not in data:
            data['alert_broken'] = True
-       self._check_fields(data, self.SSL_FIELDS)
-       return self._request('put', self.URL_UPDATE_SSL, data=data, **kwargs).json()
+        self._check_fields(data, self.SSL_FIELDS)
+        return self._request('put', self.URL_UPDATE_SSL, data=data, **kwargs).json()
 
     def update_ssl(self, data, **kwargs):
         if not isinstance(data, dict):
@@ -223,7 +223,7 @@ class StatusCake(object):
         return self._request('put', self.URL_UPDATE_SSL, data=data, **kwargs).json()
 
     def delete_ssl(self, id, **kwargs):
-       return self._request('delete', self.URL_UPDATE_SSL, data={ 'id':id}, **kwargs).json()
+        return self._request('delete', self.URL_UPDATE_SSL, data={'id': id}, **kwargs).json()
 
     def insert_test(self, data, **kwargs):
         if not isinstance(data, dict):
