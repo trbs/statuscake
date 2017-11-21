@@ -26,8 +26,6 @@ class StatusCake(object):
     URL_SSL = "https://app.statuscake.com/API/SSL/"
     URL_UPDATE_SSL = "https://app.statuscake.com/API/SSL/Update"
 
-
-
     CONTACT_GROUP_FIELDS = {
         'GroupName': (six.string_types, None, None),
         'DesktopAlert': (int, (0, 1), None),
@@ -42,8 +40,8 @@ class StatusCake(object):
     SSL_FIELDS = {
         'domain': (six.string_types, None, None),
         'checkrate': (int, (300, 600, 2800, 3600, 86400, 2073600), None),
-        'contact_groups': (six.string_types,None, to_comma_list),
-        'alert_at': (six.string_types,None, None),
+        'contact_groups': (six.string_types, None, to_comma_list),
+        'alert_at': (six.string_types, None, None),
         'alert_expiray': (bool, None, None),
         'alert_reminder': (bool, None, None),
         'alert_broken': (bool, None, None)
@@ -196,21 +194,21 @@ class StatusCake(object):
 
     def insert_ssl(self, data, **kwargs):
         if not isinstance(data, dict):
-           raise StatusCakeError("data argument must be a dict")
+            raise StatusCakeError("data argument must be a dict")
         if 'domain' not in data:
-           raise StatusCakeFieldMissingError("domain missing")
+            raise StatusCakeFieldMissingError("domain missing")
         if 'checkrate' not in data:
-           data['checkrate'] = 3600
+            data['checkrate'] = 3600
         if 'contact_groups' not in data:
-           raise StatusCakeFieldMissingError("contact_groups missing")
+            raise StatusCakeFieldMissingError("contact_groups missing")
         if 'alert_at' not in data:
-           data['alert_at'] = '1,7,30'
+            data['alert_at'] = '1,7,30'
         if 'alert_expiry' not in data:
-           data['alert_expiry'] = True
+            data['alert_expiry'] = True
         if 'alert_reminder' not in data:
-           data['alert_reminder'] = True
+            data['alert_reminder'] = True
         if 'alert_broken' not in data:
-           data['alert_broken'] = True
+            data['alert_broken'] = True
         self._check_fields(data, self.SSL_FIELDS)
         return self._request('put', self.URL_UPDATE_SSL, data=data, **kwargs).json()
 
