@@ -20,7 +20,6 @@ class StatusCake(object):
     URL_ALL_TESTS = "https://app.statuscake.com/API/Tests/"
     URL_DETAILS_TEST = "https://app.statuscake.com/API/Tests/Details/?TestID=%s"
     URL_UPDATE_TEST = "https://app.statuscake.com/API/Tests/Update"
-    URL_AUTH_CHECK = "https://app.statuscake.com/API/Auth/"
     URL_PERIODS = "https://app.statuscake.com/API/Tests/Periods/?TestID=%s"
     URL_CHECKS = "https://app.statuscake.com/API/Tests/Checks/?TestID=%s"
     URL_SSL = "https://app.statuscake.com/API/SSL/"
@@ -76,17 +75,13 @@ class StatusCake(object):
         'PostRaw': (six.string_types, None, None)
     }
 
-    def __init__(self, api_key, api_user, timeout=10, auth_check=False):
+    def __init__(self, api_key, api_user, timeout=10):
         self._api_key = api_key
         self._api_user = api_user
         self.timeout = 10
-        self._auth_check = auth_check
 
         self.session = requests.Session()
         self.session.mount('https://www.statuscake.com', HTTPAdapter(max_retries=5))
-
-        if auth_check:
-            self.auth_check()
 
     def _request(self, method, url, data=None, auth_headers=True, check_errors=True, **kwargs):
         headers = {}
@@ -134,13 +129,6 @@ class StatusCake(object):
                 raise StatusCakeFieldError("Field %s must be of type %s" % (field_name, field_type))
             if field_values is not None and data[field_name] not in field_values:
                 raise StatusCakeFieldError("Field %s value %s does not match one of: %s" % (field_name, field_type, field_values))
-
-    def do_auth_check(self, **kwargs):
-        self._request('get', self.URL_AUTH_CHECK, **kwargs).json()
-        return True
-
-    def get_user_details(self, **kwargs):
-        return self._request('get', self.URL_AUTH_CHECK, **kwargs).json().get('Details', {})
 
     def get_node_locations(self, **kwargs):
         if hasattr(self, '_location_cache_timeout') and hasattr(self, '_location_cache'):
@@ -246,6 +234,4 @@ class StatusCake(object):
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
-    auth_check = property(do_auth_check)
-    user_details = property(get_user_details)
     node_locations = property(get_node_locations)
