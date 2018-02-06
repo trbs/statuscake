@@ -17,6 +17,7 @@ class StatusCake(object):
     URL_ALERT = "https://app.statuscake.com/API/Alerts/?TestID=%s"
     URL_ALL_GROUPS = "https://app.statuscake.com/API/ContactGroups/"
     URL_UPDATE_GROUP = "https://app.statuscake.com/API/ContactGroups/Update/"
+    URL_DELETE_GROUP = URL_UPDATE_GROUP + "?ContactID=%s"
     URL_ALL_TESTS = "https://app.statuscake.com/API/Tests/"
     URL_DETAILS_TEST = "https://app.statuscake.com/API/Tests/Details/?TestID=%s"
     URL_UPDATE_TEST = "https://app.statuscake.com/API/Tests/Update"
@@ -157,6 +158,9 @@ class StatusCake(object):
             raise StatusCakeFieldMissingError("ContactID missing")
         self._check_fields(data, self.CONTACT_GROUP_FIELDS)
         return self._request('put', self.URL_UPDATE_GROUP, data=data, **kwargs).json()
+
+    def delete_contact_group(self, contact_id, **kwargs):
+        return self._request('delete', self.URL_DELETE_GROUP % contact_id, **kwargs).json()
 
     def get_alert(self, test_id, **kwargs):
         return self._request('get', self.URL_ALERT % test_id, **kwargs).json()
