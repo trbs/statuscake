@@ -1,8 +1,10 @@
-import six
 import time
-import urllib
+
 import requests
 from requests.adapters import HTTPAdapter
+import six
+from six.moves.urllib.parse import urlencode
+
 from .exceptions import StatusCakeError, StatusCakeAuthError, StatusCakeNotLinkedError, StatusCakeFieldMissingError, StatusCakeFieldError, StatusCakeResponseError
 
 
@@ -94,7 +96,7 @@ class StatusCake(object):
             })
 
         if isinstance(data, dict):
-            data = urllib.urlencode(data)
+            data = urlencode(data)
 
         kwargs.setdefault('timeout', self.timeout)
         print_json = kwargs.pop('print_json', False)
