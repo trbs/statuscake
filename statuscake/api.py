@@ -27,6 +27,7 @@ class StatusCake(object):
     URL_CHECKS = "https://app.statuscake.com/API/Tests/Checks/?TestID=%s"
     URL_SSL = "https://app.statuscake.com/API/SSL/"
     URL_UPDATE_SSL = "https://app.statuscake.com/API/SSL/Update"
+    URL_PAGE_SPEED = "https://app.statuscake.com/API/Pagespeed"
 
     CONTACT_GROUP_FIELDS = {
         'GroupName': (six.string_types, None, None),
@@ -240,5 +241,10 @@ class StatusCake(object):
             raise StatusCakeFieldMissingError("TestID missing")
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
+
+    def get_page_speed(self, **kwargs):
+        """ https://www.statuscake.com/api/Page%20Speed/List%20Pagespeed%20Test.md
+        """
+        return self._request('get', self.URL_PAGE_SPEED, **kwargs).json()
 
     node_locations = property(get_node_locations)
