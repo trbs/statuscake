@@ -231,6 +231,10 @@ class StatusCake(object):
         if 'CheckRate' not in data:
             # Use default
             data['CheckRate'] = 300
+        # Convert list to CSV string of ints
+        if 'ContactGroup' in data:
+            if isinstance(data['ContactGroup'], list):
+                data['ContactGroup'] = ','.join(map(str, data['ContactGroup']))
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
@@ -239,6 +243,10 @@ class StatusCake(object):
             raise StatusCakeError("data argument must be a dict")
         if 'TestID' not in data:
             raise StatusCakeFieldMissingError("TestID missing")
+        # Convert list to CSV string of ints
+        if 'ContactGroup' in data:
+            if isinstance(data['ContactGroup'], list):
+                data['ContactGroup'] = ','.join(map(str, data['ContactGroup']))
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
