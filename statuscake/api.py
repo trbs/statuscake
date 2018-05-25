@@ -13,6 +13,11 @@ def to_comma_list(value):
         value = ','.join(value)
     return value
 
+def to_int(value):
+    if isinstance(value, bool):
+        value = int(value)
+    return value
+
 
 class StatusCake(object):
     URL_LOCATIONS = "https://app.statuscake.com/API/Locations/json"
@@ -52,7 +57,7 @@ class StatusCake(object):
 
     TESTS_FIELDS = {
         'TestID': (int, None, None),
-        'Paused': (int, (0, 1), None),
+        'Paused': (int, (0, 1), to_int),
         'WebsiteName': (six.string_types, None, None),
         'WebsiteURL': (six.string_types, None, None),
         'Port': (int, None, None),
@@ -71,7 +76,7 @@ class StatusCake(object):
         'FindString': (six.string_types, None, None),
         'DoNotFind': (int, (0, 1), None),
         'TestType': (six.string_types, ("HTTP", "TCP", "PING", "PUSH"), None),
-        'ContactGroup': (six.string_types, None, None),
+        'ContactGroup': (six.string_types, None, to_comma_list),
         'RealBrowser': (int, (0, 1), None),
         'TriggerRate': (int, range(0, 61), None),
         'TestTags': (six.string_types, None, to_comma_list),
@@ -231,10 +236,6 @@ class StatusCake(object):
         if 'CheckRate' not in data:
             # Use default
             data['CheckRate'] = 300
-        # Convert list to CSV string of ints
-        if 'ContactGroup' in data:
-            if isinstance(data['ContactGroup'], list):
-                data['ContactGroup'] = ','.join(map(str, data['ContactGroup']))
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
@@ -246,10 +247,6 @@ class StatusCake(object):
         if 'CheckRate' not in data:
             # Use default
             data['CheckRate'] = 300
-        # Convert list to CSV string of ints
-        if 'ContactGroup' in data:
-            if isinstance(data['ContactGroup'], list):
-                data['ContactGroup'] = ','.join(map(str, data['ContactGroup']))
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
