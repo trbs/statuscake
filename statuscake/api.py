@@ -243,6 +243,9 @@ class StatusCake(object):
             raise StatusCakeError("data argument must be a dict")
         if 'TestID' not in data:
             raise StatusCakeFieldMissingError("TestID missing")
+        if 'CheckRate' not in data:
+            # Use default
+            data['CheckRate'] = 300
         # Convert list to CSV string of ints
         if 'ContactGroup' in data:
             if isinstance(data['ContactGroup'], list):
