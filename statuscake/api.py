@@ -13,6 +13,7 @@ def to_comma_list(value):
         value = ','.join(value)
     return value
 
+
 def to_int(value):
     if isinstance(value, bool):
         value = int(value)
