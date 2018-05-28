@@ -244,9 +244,9 @@ class StatusCake(object):
             raise StatusCakeError("data argument must be a dict")
         if 'TestID' not in data:
             raise StatusCakeFieldMissingError("TestID missing")
+        # if CheckRate not passed it will be reset to the account plan default (either 30 or 300)
         if 'CheckRate' not in data:
-            # Use default
-            data['CheckRate'] = 300
+            raise StatusCakeFieldMissingError("CheckRate missing")
         self._check_fields(data, self.TESTS_FIELDS)
         return self._request('put', self.URL_UPDATE_TEST, data=data, **kwargs).json()
 
