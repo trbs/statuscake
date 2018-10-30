@@ -51,7 +51,7 @@ setup(
     keywords='statuscake',
     packages=["statuscake"],
     install_requires=[
-        'requests>=2.4.3',
-        'six>=1.8',
+        'requests>=2.20.0',
+        'six>=1.11.0',
     ],
 )
