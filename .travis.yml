@@ -4,8 +4,8 @@ python:
   - 2.7
   - 3.5
   - 3.6
-  - pypy
-  - pypy3.3-5.5-alpha
+#  - pypy
+#  - pypy3.3-5.5-alpha
 
 before_install:
   - sudo chmod 0777 /var/run
