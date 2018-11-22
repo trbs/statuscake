@@ -39,7 +39,7 @@ class StatusCake(object):
         'GroupName': (six.string_types, None, None),
         'DesktopAlert': (int, (0, 1), None),
         'Email': (six.string_types, None, to_comma_list),
-        'Boxcat': (six.string_types, None, None),
+        'Boxcar': (six.string_types, None, None),
         'Pushover': (six.string_types, None, None),
         'PingURL': (six.string_types, None, None),
         'Mobile': (six.string_types, None, to_comma_list),
