@@ -35,5 +35,5 @@ Examples
 .. code-block:: bash
 
   from statuscake import StatusCake
-  client = StatusCake(api_key="YNWHGOBX4w8gbc19", api_user="test")
+  client = StatusCake(api_key="my-api-key", api_user="my-user")
   client.get_all_tests()
