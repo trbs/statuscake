@@ -19,7 +19,7 @@ Create a virtualenv and install the requirements.
 
 .. code-block:: bash
 
-  $ virtualenv -p python3.5 status_cake
+  $ python3 -m venv status_cake
   $ source status_cake/bin/activate
   (status_cake) $ pip install -r requirements.txt
 
