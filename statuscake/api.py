@@ -89,7 +89,7 @@ class StatusCake(object):
     def __init__(self, api_key, api_user, timeout=10):
         self._api_key = api_key
         self._api_user = api_user
-        self.timeout = 10
+        self.timeout = timeout
 
         self.session = requests.Session()
         self.session.mount('https://www.statuscake.com', HTTPAdapter(max_retries=5))
