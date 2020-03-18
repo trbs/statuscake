@@ -76,7 +76,7 @@ class StatusCake(object):
         'Virus': (int, (0, 1), None),
         'FindString': (six.string_types, None, None),
         'DoNotFind': (int, (0, 1), None),
-        'TestType': (six.string_types, ("HTTP", "TCP", "PING", "PUSH"), None),
+        'TestType': (six.string_types, ("DNS", "HEAD", "HTTP", "PING", "PUSH", "SMTP", "SSH", "TCP"), None),
         'ContactGroup': (six.string_types, None, to_comma_list),
         'RealBrowser': (int, (0, 1), None),
         'TriggerRate': (int, range(0, 61), None),
