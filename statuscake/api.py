@@ -211,6 +211,8 @@ class StatusCake(object):
             data['alert_reminder'] = True
         if 'alert_broken' not in data:
             data['alert_broken'] = True
+        if 'alert_mixed' not in data:
+            data['alert_mixed'] = True
         self._check_fields(data, self.SSL_FIELDS)
         return self._request('put', self.URL_UPDATE_SSL, data=data, **kwargs).json()
 
